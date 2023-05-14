@@ -1,0 +1,20 @@
+table {
+    font-size: 9pt;
+}
+
+th {
+    font-size: 11pt;
+    line-height: 23px;
+}
+
+.tnum {
+    text-align: right;
+    padding-right: 20px;
+    font-weight: bold;
+}
+
+.positions {
+    font-size: 7pt;
+    line-height: 19px;
+    vertical-align: middle;
+}
