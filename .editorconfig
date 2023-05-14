@@ -1,0 +1,16 @@
+# EditorConfig is awesome: https://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+[*]
+# Good manners
+insert_final_newline = true
+# Traditional tab size, for defined alignment
+tab_width = 8
+
+[*.py]
+charset = utf-8
+indent_style = space
+indent_size = 4
+max_line_length = 96
