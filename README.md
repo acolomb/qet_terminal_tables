@@ -33,12 +33,12 @@ License along with this program.  If not, see
 Motivation
 ----------
 
-*QElectroTech* does not yet integrate a good way to build
-cross-referenced terminal block lists that summarize where to find the
-placed terminal elements.  It does however provide access to its
-internal SQLite database (by exporting it) where most of the relevant
-information can be found.  This program generates pretty HTML tables
-from that, which fit nicely next to a schematic drawing of the
+*QElectroTech* (as of version 0.9) does not yet integrate a good way
+to build cross-referenced terminal block lists that summarize where to
+find the placed terminal elements.  It does however provide access to
+its internal SQLite database (by exporting it) where most of the
+relevant information can be found.  This program generates pretty HTML
+tables from that, which fit nicely next to a schematic drawing of the
 terminal block.  The output can be placed next to that in a simple
 HTML-formatted text field.
 
@@ -54,15 +54,23 @@ Example:
 
 The same terminal label can appear several times in the project,
 e.g. for terminal strips with two or more connection points.  There is
-no requirement that they have the same potential or having a wire
-connecting them.  The list ist solely assembled with cross-references
-to the folio positions where the terminal elements with identical
-labels appear.
+no requirement that they have the same potential or a wire connecting
+them.  The list is solely assembled with cross-references to the folio
+positions where the terminal elements with identical labels appear.
+The *terminal number* part should be strictly numeric, without
+additional characters.
+
+Note that terminals within a block are always assumed to have
+consecutive numbers starting from one.  For the example above, the
+table for block `-X10` will have entries numbered `1` through `8` at
+least.
 
 
 ### Features ###
 + Extract element data from the exported SQLite database.
 + Group by terminal block / group.
++ Fill in missing rows for terminal numbers never used, to avoid gaps
+  in the counting.
 + Output one HTML file per block, summarizing the associated
   terminals.
 + Align to the standard 20 pixel grid for putting next to a graphical
@@ -79,13 +87,18 @@ labels appear.
 
 - No instant integration: needs a DB export, generate step, pasting
   code back into project.  If the project changes, this needs to be
-  re-done.
+  re-done every time.
+- The "function" field of the associated wire connection is not
+  available from the database, thus no semantic info what the
+  connection is used for can be displayed.
+- No actual cross-reference links, the folio positions are not
+  "clickable" for jumping to the referenced place.
 - Limited HTML styling [as supported by the QT engine][qt-html].
-- Pasted code is mangled heavily in QElectroTech, can not be easily
-  adjusted later on.  Better just replace it completely with a freshly
-  generated version.
 - QElectroTech overrides some table layout settings, so some standard
   HTML / CSS techniques have no effect.
+- Pasted code is mangled heavily in QElectroTech, cannot be easily
+  adjusted later on.  Better just replace it completely with a freshly
+  generated version.
 
 [qt-html]: https://doc.qt.io/qt-5/richtext-html-subset.html "Supported HTML Subset"
 
@@ -99,6 +112,11 @@ Head to [its homepage][python] to get started.
 Simply clone the [repository on GitHub][github] or download a release
 archive and unpack it somewhere on your computer.  No further setup
 procedure required.
+
+It is advisable to keep the code next to the project files (`.qet` and
+`.sqlite` files), as the `.html` files are written to the current
+working directory, and invoking the package is easiest from the parent
+directory.
 
 [python]: https://www.python.org "Official home of the Python Programming Language"
 [github]: https://github.com/acolomb/qet_terminal_tables "Project repository on GitHub"
@@ -136,8 +154,10 @@ possible.
 ### Output to HTML Files ###
 
 The resulting tables are written to individual HTML files, named after
-the terminal block labels (part before the colon).  The content of
-each file can be pasted directly into a QElectroTech text field:
+the terminal block labels (part before the colon).  They end up in the
+current working directory, where `qet_terminal_tables` was called
+from.  The content of each file can be pasted directly into a
+QElectroTech text field:
 
 1. Create an empty text field on the target folio.
 2. Select *Edit the text field* from the context menu (right click) or
