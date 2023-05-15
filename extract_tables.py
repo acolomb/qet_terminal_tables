@@ -57,8 +57,9 @@ def process_db(dbfile, header=None, footer=None, indent=0):
                 terminals = con.cursor()
                 terminals.execute(query_terminals(f"AND tblock='{tblock}'"))
 
-                rows = 0
+                used, rows = 0, 0
                 for term_block, tnum, term_mentions, fpositions in terminals:
+                    used += 1
                     rows += 1
                     while rows < tnum:
                         # Insert blank rows for never mentioned terminals
@@ -67,7 +68,7 @@ def process_db(dbfile, header=None, footer=None, indent=0):
                         rows += 1
                     table.writerow((tnum, f'({term_mentions})', fpositions),
                                    classes=('tnum', 'mentions', 'positions'))
-            print(f'{outfile.name}: {mentions=} {maxtnum=} {rows=}')
+            print(f'{outfile.name}: {mentions=} {maxtnum=} {rows=} {used=}')
 
             if footer:
                 outfile.write(footer)
