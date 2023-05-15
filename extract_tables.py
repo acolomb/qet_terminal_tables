@@ -15,7 +15,7 @@ SELECT
     COUNT(*) AS "mentions",
     group_concat("folio" || '-' || "position", ', ') as "fpositions"
 FROM "element_nomenclature_view" AS "t"
-WHERE "element_type" = 'terminal' AND "designation" IS NULL
+WHERE "element_type" = 'terminal' AND "label" LIKE '%:%'
 GROUP BY "tblock"
 ORDER BY "tblock" ASC
 '''
@@ -31,7 +31,7 @@ SELECT
       WHERE "ct"."label" = "t"."label" ) AS "mentions",
     group_concat("folio" || '-' || "position", ', ') as "fpositions"
 FROM "element_nomenclature_view" AS "t"
-WHERE "element_type" = 'terminal' AND "designation" IS NULL {add_where}
+WHERE "element_type" = 'terminal' AND "label" LIKE '%:%' {add_where}
 GROUP BY "label"
 ORDER BY "tblock" ASC, "tnum" ASC
 '''
