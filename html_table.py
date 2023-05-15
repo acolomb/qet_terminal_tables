@@ -64,7 +64,7 @@ class TableGeneratorHTML:
             tagfunc = self.td
         if len(classes):
             classes = list(classes) + [None] * (len(row) - len(classes))
-            cells = [tagfunc(content, ' '.join((f'class="{cls}"', cell_attr)))
+            cells = [tagfunc(content, ' '.join((f'class="{cls}"', cell_attr)).strip())
                      for content, cls in zip(row, classes)]
         else:
             cells = [tagfunc(content, cell_attr) for content in row]
