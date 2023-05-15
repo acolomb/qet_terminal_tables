@@ -5,11 +5,12 @@ table {
 th {
     font-size: 11pt;
     line-height: 23px;
+    text-align: left;
 }
 
 .tnum {
     text-align: right;
-    padding-right: 20px;
+    padding-right: 15px;
     font-weight: bold;
 }
 
