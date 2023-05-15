@@ -147,8 +147,8 @@ already exist, exported from QElectroTech using the **Project** >
 A CSS file can be specified using the `--styles` (or shorter `-s`)
 option.  Without a further argument, it looks for a file named
 `styles.css` in the current working directory.  The included
-`style-template.css` can be used as a basis to see what styling is
-possible.
+`samples/style-template.css` can be used as a basis to see what
+styling is possible.
 
 
 ### Output to HTML Files ###
