@@ -182,3 +182,8 @@ web browser.  Note however that QElectroTech / QT renders the HTML
 differently, as it supports only a [subset of the HTML
 specification][qt-html].  Especially geometry settings (width, height)
 and borders will not work like in a browser.
+
+For each generated HTML file, `qet_terminal_tables` prints the file
+name, followed by some statistics, such as number of used terminals in
+the block, number of overall mentions and the number of HTML rows
+generated.
