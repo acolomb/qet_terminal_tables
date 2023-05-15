@@ -141,6 +141,11 @@ If no database file name is given, the tool looks for a file named
 already exist, exported from QElectroTech using the **Project** >
 **Export the internal project database** menu item.
 
+**Note: The internal database is only updated when needed, such as
+during project loading or when an index table is reloaded.  If you
+have no index tables in your project, the exported database may be
+outdated until the project is closed and re-opened!**
+
 
 ### Style Sheet ###
 
