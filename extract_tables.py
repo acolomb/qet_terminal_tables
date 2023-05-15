@@ -47,7 +47,7 @@ def process_db(dbfile, header=None, footer=None, indent=0):
     table_attr = 'border="0" cellspacing="0" cellpadding="0"'
 
     for tblock, maxtnum, mentions, fpositions in blocks:
-        with open(f'Klemmenliste {tblock}.html', 'wt') as outfile:
+        with open(f'terminals_{tblock}.html', 'wt') as outfile:
             if header:
                 outfile.write(header)
 
